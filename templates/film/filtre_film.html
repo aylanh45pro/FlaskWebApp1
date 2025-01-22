@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Filtrer les films</title>
+{% endblock %}
+
+{% block body %}
+    <fieldset class="fieldset_add_type">
+<h3>Filtrer les Films</h3>
+<form method="get" action="/film/filtre">
+    <div class="form-group">
+        <label for="filter_word">Titre du film :</label>
+        <input id="filter_word" type="text" name="filter_word" value="{{ request.args.get('filter_word', '') }}" placeholder="Rechercher par titre"><br>
+        <label for="genre_id">Genre du film :</label>
+        <select id="genre_id" name="genre_id">
+            <option value="">Tous</option>
+            {% for genre in genresFilms %}
+            <option value="{{ genre.id }}" {% if genre.id == request.args.get('genre_id') %}selected{% endif %}>{{ genre.libelleGenre }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="duree_min">Durée minimale :</label>
+        <input id="duree_min" type="number" name="duree_min" value="{{ request.args.get('duree_min', '') }}" placeholder="Durée minimale"><br>
+        <label for="duree_max">Durée maximale :</label>
+        <input id="duree_max" type="number" name="duree_max" value="{{ request.args.get('duree_max', '') }}" placeholder="Durée maximale"><br>
+        <button type="submit" class="btn btn-primary">Filtrer</button>
+        <a href="/film/filtre" class="btn btn-secondary">Réinitialiser</a>
+    </div>
+</form>
+    </fieldset>
+<br><br>
+<h3>Résultats des films filtrés</h3>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th><th>Titre</th><th>Date de sortie</th><th>Nom du réalisateur</th><th>Durée</th><th>Genre</th><th>Affiche</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% if films | length >= 1 %}
+        {% for film in films %}
+            <tr>
+                <td>{{ film.id }}</td>
+                <td>{{ film.titreFilm }}</td>
+                <td>{{ film.dateSortie }}</td>
+                <td>{{ film.nomRealisateur }}</td>
+                <td>{{ film.duree }}</td>
+                <td>{{ film.libelleGenre }} (ID: {{ film.genre_id }})</td>
+                <td>
+                    {{ film.affiche }}
+                    <img style="width:40px;height:40px" src="/static/images/{{ film.affiche }}" alt="Affiche de {{ film.titreFilm }}">
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="/film/edit?id={{ film.id }}">Éditer</a>&nbsp;
+                    <a class="btn btn-danger" href="/film/delete?id={{ film.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce film?');">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="8" class="text-center">Aucun film trouvé</td>
+        </tr>
+    {% endif %}
+    </tbody>
+</table>
+{% endblock %}

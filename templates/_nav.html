@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Votre Titre</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style>
+        .navbar {
+            background-color: #563d7c;
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #ffffff !important;
+        }
+        .navbar-nav .nav-item:hover {
+            background-color: #6f42c1;
+        }
+        .dropdown-menu {
+            background-color: #6f42c1;
+        }
+        .dropdown-item {
+            color: #ffffff !important;
+        }
+        .dropdown-item:hover {
+            background-color: #563d7c;
+        }
+        .navbar-toggler-icon {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="filmDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Films
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="filmDropdown">
+                        <li><a class="dropdown-item" href="/film/show">Afficher les films</a></li>
+                        <li><a class="dropdown-item" href="/film/add">Ajouter des films</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="genreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Genres
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="genreDropdown">
+                        <li><a class="dropdown-item" href="/genre-film/show">Afficher les genres de films</a></li>
+                        <li><a class="dropdown-item" href="/genre-film/add">Ajouter des genres de films</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/film/filtre">Filtrer les films</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../static/bootstrap/js/bootstrap.js"></script>
+</body>
+</html>

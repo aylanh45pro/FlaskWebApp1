@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Ajouter un film</title>
+{% endblock %}
+
+{% block body %}
+    <fieldset class="fieldset_add_type">
+        <legend>Ajout d'un film</legend>
+
+        <form method="post" action="/film/add">
+            <div class="form-group">
+                <label for="titreFilm">Titre du film : <span class="obligatoire">*</span></label><br>
+                <input id="titreFilm" type="text" name="titreFilm" size="18"
+                       placeholder="Saisir le titre du film" required><br>
+                <label for="dateSortie">Date de sortie : <span class="obligatoire">*</span></label><br>
+                <input id="dateSortie" type="date" name="dateSortie"
+                       placeholder="Saisir la date de sortie" required><br>
+                <label for="nomRealisateur">Nom du réalisateur : <span class="obligatoire">*</span></label><br>
+                <input id="nomRealisateur" type="text" name="nomRealisateur" size="18"
+                       placeholder="Saisir le nom du réalisateur" required><br>
+                <label for="duree">Durée du film (en minutes) : <span class="obligatoire">*</span></label><br>
+                <input id="duree" type="number" name="duree" size="18"
+                       placeholder="Saisir la durée" required><br>
+                <label for="genre_id">Genre : <span class="obligatoire">*</span></label><br>
+                <select id="genre_id" name="genre_id" required>
+                    <option value="">Sélectionner un genre</option>
+                    {% for genre in genresFilms %}
+                        <option value="{{ genre.id }}">{{ genre.libelleGenre }}</option>
+                    {% endfor %}
+                </select><br>
+                <div class="mb-3">
+                    <label for="affiche" class="form-label">Affiche : <span class="obligatoire">*</span></label><br>
+                    <input class="form-control" type="file" id="affiche" name="affiche" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Valider</button>
+                <button type="button" class="btn btn-danger">
+                    <a href="/film/show" style="color: white; text-decoration: none;">Annuler</a>
+                </button>
+            </div>
+        </form>
+    </fieldset>
+                <div class="btn-back">
+                    <a class="btn btn-secondary" href="/film/show">Retour à la liste des films</a>&nbsp;
+                </div>
+{% endblock %}

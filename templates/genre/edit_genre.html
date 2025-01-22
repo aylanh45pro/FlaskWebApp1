@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Modifier un genre</title>
+{% endblock %}
+
+{% block body %}
+    <fieldset class="fieldset_add_type">
+        <legend>Modifier un genre</legend>
+        <form method="post" action="/genre-film/edit">
+            <div class="form-group">
+                <input type="hidden" name="id" value="{{ genresFilms.id }}" id="id">
+                <label for="libelleGenre">Genre du film : <span class="obligatoire">*</span></label><br>
+                <input type="text" name="libelleGenre" size="18" value="{{ genresFilms.libelleGenre }}" id="libelleGenre" required><br>
+                <div class="mb-3">
+                    <input type="hidden" name="logo" value="{{ genresFilms.logo }}" id="id">
+                    <label for="logo" class="form-label">Logo : <span class="obligatoire">*</span></label><br>
+                    <input class="form-control" type="file" id="logo" name="logo" required>
+                </div>
+                <button type="submit" class="btn btn-primary" value="Modifier">Modifier</button>
+                <a class="btn btn-danger" href="/genre-film/show">Annuler</a>
+            </div>
+        </form>
+    </fieldset>
+                <div class="btn-back">
+                    <a class="btn btn-secondary" href="/genre-film/show">Retour à la liste des genres de films</a>&nbsp;
+                </div>
+{% endblock %}

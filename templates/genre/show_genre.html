@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Afficher les genres de films</title>
+{% endblock %}
+
+{% block body %}
+<h3>Genres de films</h3>
+<div class="btn-add">
+    <a class="btn btn-primary" href="/genre-film/add">Ajouter genre</a>&nbsp;
+</div>
+<br><br>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th><th>Libellé</th><th>Logo</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% if genresFilms | length >= 1 %}
+        {% for genre in genresFilms %}
+            <tr>
+                <td>{{ genre.id }}</td>
+                <td>{{ genre.libelleGenre }}</td>
+                <td>
+                    <img style="width:40px;height:40px" src="/static/images/{{ genre.logo }}" alt="Logo de {{ genre.libelleGenre }}">
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="/genre-film/edit?id={{ genre.id }}">Éditer</a>&nbsp;
+                    <a class="btn btn-danger" href="/genre-film/delete?id={{ genre.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce genre de film (cela supprimera tous les films associés) ?');">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="4" class="text-center">Pas de genre de film</td>
+        </tr>
+    {% endif %}
+    </tbody>
+</table>
+{% endblock %}

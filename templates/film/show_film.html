@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Afficher les films</title>
+{% endblock %}
+
+{% block body %}
+<h3>Films</h3>
+<div class="btn-add">
+    <a class="btn btn-primary" href="/film/add">Ajouter film</a>&nbsp;
+</div>
+<br><br>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th><th>Titre</th><th>Date de sortie</th><th>Nom du réalisateur</th><th>Durée</th><th>Genre</th><th>Affiche</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% if films | length >= 1 %}
+        {% for film in films %}
+            <tr>
+                <td>{{ film.id }}</td>
+                <td>{{ film.titreFilm }}</td>
+                <td>{{ film.dateSortie }}</td>
+                <td>{{ film.nomRealisateur }}</td>
+                <td>{{ film.duree }}</td>
+                <td>{{ film.libelleGenre }} (ID: {{ film.genre_id }})</td>
+                <td>
+                    <img style="width:40px;height:40px" src="/static/images/{{ film.affiche }}" alt="Affiche de {{ film.titreFilm }}">
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="/film/edit?id={{ film.id }}">Éditer</a>&nbsp;
+                    <a class="btn btn-danger" href="/film/delete?id={{ film.id }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce film?');">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="8" class="text-center">Pas de film</td>
+        </tr>
+    {% endif %}
+    </tbody>
+</table>
+{% endblock %}
